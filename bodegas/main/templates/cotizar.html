@@ -1,0 +1,29 @@
+{% include 'basehead.html' %}
+
+<body class="p-2">
+    {% include 'menu.html' %}
+    <h1>Cotiza tu Bodega</h1>
+    <form>
+        {% csrf_token %}
+        {{ tipo_bodega_form }}
+    </form>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Bodegas seleccionadas</th>
+            </tr>
+        </thead>
+        {% for bodega in bodegas %}
+        <tbody>
+            <tr>
+                <td> {{ bodega.tipo }}</td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+    {% for bodega in bodegas %}
+    {% endfor %}
+
+    {% include 'base.html' %}
+</body>
