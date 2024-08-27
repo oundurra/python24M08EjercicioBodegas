@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from main.views import index, cotizar, register, add_like, remove_like
+from main.views import index, cotizar, register, add_like, remove_like, agregar_bodega
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -27,5 +27,6 @@ urlpatterns = [
     path('removelike/<int:user_id>/<int:noticia_id>/', remove_like, name='removelike'),
 
     path('', index, name='home'),
-    path('cotizar/', cotizar, name='cotizar')
+    path('cotizar/', cotizar, name='cotizar'),
+    path('agregar_bodega/', agregar_bodega, name='agregar_bodega'),
 ]   

@@ -44,3 +44,6 @@ class Bodega(models.Model):
     id = models.AutoField(primary_key=True)
     codigo = models.CharField(max_length=10)
     tipo_bodega = models.ForeignKey(TipoBodega, models.DO_NOTHING, blank=True, null=True)
+
+    def __str__(self):
+        return self.codigo

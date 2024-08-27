@@ -2,28 +2,46 @@
 
 <body class="p-2">
     {% include 'menu.html' %}
-    <h1>Cotiza tu Bodega</h1>
-    <form>
+
+    <h1>Cotizacion</h1>
+    {% include 'base.html' %}
+
+    <form  method="post" novalidate>
+        <input type="hidden" value="{{ lista_bodega }}" id="lista_bodega" name="lista_bodega">
+
         {% csrf_token %}
         {{ tipo_bodega_form }}
+        <input type="submit" formaction="{% url 'cotizar' %}" value="Filtrar">
+    
+        {{ bodega_form }}
+        {% if bodega_form.bodega.field.choices.queryset.all|length %}
+        <input type="submit" formaction="{% url 'agregar_bodega' %}" value="Agregar">
+        {% endif %}
     </form>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Bodegas seleccionadas</th>
-            </tr>
-        </thead>
-        {% for bodega in bodegas %}
-        <tbody>
-            <tr>
-                <td> {{ bodega.tipo }}</td>
-            </tr>
-        </tbody>
+    <h3>Bodegas Seleccionadas</h3>
+
+    <table id="bodegas">
+        {% for bodega in bodegas_seleccionadas %}
+        <tr>
+            <td>{{ bodega.codigo }}</td>
+        </tr>
         {% endfor %}
     </table>
-    {% for bodega in bodegas %}
-    {% endfor %}
 
-    {% include 'base.html' %}
+    <h3>Tipos Bodega</h3>
+    <table class="table">
+        <tr>
+            <th>Tipo</th>
+            <th>Tamaño</th>
+            <th>Precio</th>
+        </tr>
+        {% for tipo_bodega in tipos_bodega %}
+        <tr>
+            <td>{{ tipo_bodega.tipo }}</td>
+            <td>{{ tipo_bodega.metros }}m2</td>
+            <td>{{ tipo_bodega.precio }}</td>
+        </tr>
+        {% endfor %}
+    </table>
 </body>
